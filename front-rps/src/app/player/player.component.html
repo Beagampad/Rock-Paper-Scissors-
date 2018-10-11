@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar><i class="fas fa-smile face"></i></div>
+          <mat-card-title>YOU</mat-card-title>
+          <mat-card-subtitle>Player 1</mat-card-subtitle>
+        </mat-card-header>
+        <div  class="icons">
+            <i (click)="choose(0)" [ngClass]="{'selected':(playerSelected === 0)}" class="fas fa-hand-rock"></i>
+            <i (click)="choose(1)" [ngClass]="{'selected':(playerSelected === 1)}" class="fas fa-paper-plane"></i>
+            <i (click)="choose(2)" [ngClass]="{'selected':(playerSelected === 2)}" class="fas fa-cut"></i>
+        </div>    
+        <mat-card-content>
+          <p>
+            Score:
+          </p>
+        </mat-card-content>
+        <mat-chip-list>
+            <mat-chip color="primary" selected>{{ scores[0] }}</mat-chip>
+          </mat-chip-list>
+      </mat-card>
+    </div>
+    <div class="col">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar><i class="fas fa-angry face"></i></div>
+          <mat-card-title>Enemy</mat-card-title>
+          <mat-card-subtitle *ngIf= local>Local Player</mat-card-subtitle>
+          <mat-card-subtitle *ngIf= !local>Remote Player</mat-card-subtitle>
+        </mat-card-header>
+        <div *ngIf="enemySelected !== -1 && local" class="enemyicons" >
+            <i *ngIf="enemySelected === 0" class="fas fa-hand-rock"></i>
+            <i *ngIf="enemySelected === 1" class="fas fa-paper-plane"></i>
+            <i *ngIf="enemySelected === 2" class="fas fa-cut"></i>         
+        </div>
+        <div *ngIf="enemySelected !== -1 && !local" class="enemyicons" >
+          <i *ngIf="enemySelected === 0" class="fas fa-hand-rock"></i>
+          <i *ngIf="enemySelected === 1" class="fas fa-paper-plane"></i>
+          <i *ngIf="enemySelected === 2" class="fas fa-cut"></i>         
+      </div>
+        <mat-card-content>
+          <p>
+           Score:
+          </p>
+        </mat-card-content>
+        <mat-chip-list>
+            <mat-chip color="primary" selected>{{ scores[1] }}</mat-chip>
+          </mat-chip-list>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    
+    <div class="col result">
+      <div class="flex-container flex-center" style="flex-direction: column">
+      <div [ngSwitch]="result">
+        <ng-template [ngSwitchCase]= "0"> <h1> YOU WIN! </h1></ng-template>
+        <ng-template [ngSwitchCase]= "1"> <h1> You lose :( </h1> </ng-template>
+        <ng-template [ngSwitchCase]= "2"> <h1>It's a tie </h1> </ng-template>
+        <ng-template ngSwitchDefault> </ng-template>
+    </div> 
+        <p> Pick again to continue or </p>
+        <button  (click)="reset()" mat-raised-button  color="primary"> Reset score</button>
+        <button  (click)="changeplayer()" mat-raised-button  color="primary"> Change Player</button>
+
+    </div>
+    </div>
+    
+  </div>
+</div>
+
+
+
+
+
+
+
+
